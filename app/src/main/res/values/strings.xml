@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MarsCal</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_mars2earth">Mars Date to Earth Date</string>
+    <string name="calc_mars2earth">Calculate Earth Date</string>
+    <string name="action_earth2mars">Earth Date to Mars Date</string>
+    <string name="calc_earth2mars">Calculate Mars Date</string>
+</resources>

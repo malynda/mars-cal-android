@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/mars_earth_sm"
+    android:layout_height="match_parent"
+    tools:context=".Mars2Earth">
+
+    <EditText
+        android:textColor="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/inputMarsYear"
+        android:layout_gravity="center_horizontal"
+        android:text="Enter Mars Year Here" />
+    <EditText
+        android:textColor="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/inputMarsDate"
+        android:layout_gravity="center_horizontal"
+        android:text="Enter Mars Date Here" />
+
+    <TextView
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Earth Date Will Appear Here"
+        android:id="@+id/earthDateOutput"
+        android:layout_gravity="center_horizontal" />
+
+    <Button android:id="@+id/bCalcMars2Earth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calc_mars2earth" />
+
+</LinearLayout>
