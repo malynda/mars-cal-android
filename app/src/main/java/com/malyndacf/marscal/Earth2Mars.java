@@ -96,8 +96,6 @@ public class Earth2Mars extends Activity {
 
         jdate = Convert2Julian(getEarthInputDate(earthDate));
 
-
-
     }
 
     protected double Convert2Julian(GregorianCalendar earthInputDate){
@@ -117,23 +115,17 @@ public class Earth2Mars extends Activity {
 
     protected double Convert2Ls(double jdate){
 // Convert a Julian date to corresponding "sol" and "Ls"
-        var sol;
-        var ls;
-        var martianyear;
-        var martianmonth;
+        double sol;
+        double ls;
+        int martianyear;
+        int martianmonth;
 
-        var jdate_ref=2.442765667e6; // 19/12/1975 4:00:00, such that Ls=0
+        double jdate_ref=2.442765667e6; // 19/12/1975 4:00:00, such that Ls=0
 // jdate_ref is also the begining of Martian Year "12"
-        var martianyear_ref=12;
-        var earthday=86400.0;
-        var marsday=88775.245;
-        var marsyear=668.60; // number of sols in a martian year
-
-// Start by converting given date to Julian date
-        Convert2Julian();
-
-// Convert julian days to sol date
-        jdate=document.calendar.julian.value;
+        int martianyear_ref=12;
+        double earthday=86400.0;
+        double marsday=88775.245;
+        double marsyear=668.60; // number of sols in a martian year
 
         sol=(jdate-jdate_ref)*earthday/marsday;
 
@@ -167,19 +159,19 @@ public class Earth2Mars extends Activity {
 
 /*--------------------------------------------------------------------------*/
 
-    function Sol2Ls(sol) {
-        var sol;
-        var ls;
+    protected double Sol2Ls(double sol) {
+        double ls;
 
-        var year_day=668.6; // number of sols in a martian year
-        var peri_day=485.35; // perihelion date
-        var e_ellip=0.09340; // orbital ecentricity
-        var timeperi=1.90258341759902 // 2*Pi*(1-Ls(perihelion)/360); Ls(perihelion)=250.99
-        var rad2deg=180./Math.PI;
+        double year_day=668.6; // number of sols in a martian year
+        double peri_day=485.35; // perihelion date
+        double e_ellip=0.09340; // orbital ecentricity
+        double timeperi=1.90258341759902;// 2*Pi*(1-Ls(perihelion)/360); Ls(perihelion)=250.99
+        double rad2deg=180./Math.PI;
 
-        var i;
-        var zz,zanom,zdx=10;
-        var xref,zx0,zteta;
+        int i;
+        double zz,zanom;
+        int zdx=10;
+        double xref,zx0,zteta;
 // xref: mean anomaly, zx0: eccentric anomaly, zteta: true anomaly
 
         zz=(sol-peri_day)/year_day;
@@ -190,7 +182,7 @@ public class Earth2Mars extends Activity {
 // Using Newton iterations
         zx0=xref+e_ellip*Math.sin(xref);
         do {
-            zdx=-(zx0-e_ellip*Math.sin(zx0)-xref)/(1.-e_ellip*Math.cos(zx0));
+            zdx=-(zx0-e_ellip*Math.sin((zx0)-xref)/(1.-e_ellip*Math.cos(zx0));
             zx0=zx0+zdx;
         }while (zdx>1.e-7);
         if (zanom<0) zx0=-zx0;
