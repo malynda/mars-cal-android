@@ -92,9 +92,16 @@ public class Earth2Mars extends Activity {
     }
 
     protected void calcMarsDate(DatePicker earthDate){
-        double jdate;
+        double jdate, ls;
+        String output;
 
         jdate = Convert2Julian(getEarthInputDate(earthDate));
+        ls = Convert2Ls(jdate);
+
+
+// year, month, ls, sol
+        output = "";
+        marsDate.setText(output);
 
     }
 
@@ -119,6 +126,7 @@ public class Earth2Mars extends Activity {
         double ls;
         int martianyear;
         int martianmonth;
+        String output;
 
         double jdate_ref=2.442765667e6; // 19/12/1975 4:00:00, such that Ls=0
 // jdate_ref is also the begining of Martian Year "12"
@@ -147,14 +155,10 @@ public class Earth2Mars extends Activity {
         ls=Sol2Ls(sol);
 
 // Knowing Ls compute martian month
-        martianmonth=1+Math.floor(ls/30.);
+//        martianmonth=1+Math.floor(((ls))/30.);
 
-//Display value with a maximum of 2 decimal digits
-        document.calendar.martianyear.value=martianyear;
-        document.calendar.martianmonth.value=martianmonth;
-        document.calendar.ls.value=Math.round(ls*10)/10;
-//document.calendar.sol.value=Math.round(sol*10)/10;
-        document.calendar.sol.value=1+Math.floor(sol);
+        return ls;
+
     }
 
 /*--------------------------------------------------------------------------*/
@@ -182,7 +186,7 @@ public class Earth2Mars extends Activity {
 // Using Newton iterations
         zx0=xref+e_ellip*Math.sin(xref);
         do {
-            zdx=-(zx0-e_ellip*Math.sin((zx0)-xref)/(1.-e_ellip*Math.cos(zx0));
+            zdx=-(zx0-e_ellip*Math.sin(((zx0)-xref)/(1.-e_ellip*Math.cos(zx0))));
             zx0=zx0+zdx;
         }while (zdx>1.e-7);
         if (zanom<0) zx0=-zx0;
