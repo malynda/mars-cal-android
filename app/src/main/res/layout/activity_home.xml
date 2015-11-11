@@ -11,12 +11,12 @@
         android:layout_height="wrap_content" android:textColor="#FFFFFF" />
 
     <Button android:id="@+id/bLaunchMars2Earth"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/action_mars2earth" />
 
     <Button android:id="@+id/bLaunchEarth2Mars"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/action_earth2mars" />
 

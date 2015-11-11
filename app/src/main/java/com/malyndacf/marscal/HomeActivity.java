@@ -56,13 +56,27 @@ public class HomeActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        switch (item.getItemId()) {
+            case R.id.earthDateInput:
+                Intent earth2MarsIntent = new Intent(HomeActivity.this, Earth2Mars.class);
+                startActivity(earth2MarsIntent);
+//                newGame();
+//                return true;
+            case R.id.inputMarsDate:
+                Intent mars2EarthIntent = new Intent(HomeActivity.this, Mars2Earth.class);
+                startActivity(mars2EarthIntent);
+//                showHelp();
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
+//        return super.onOptionsItemSelected(item);
     }
 }

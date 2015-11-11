@@ -1,7 +1,11 @@
 package com.malyndacf.marscal;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +19,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by malynda on 4/13/15.
  */
-public class Mars2Earth extends Activity {
+public class Mars2Earth extends ActionBarActivity {
 
     private double marsInputDate;
     private int marsInputYear;
@@ -30,7 +34,7 @@ public class Mars2Earth extends Activity {
     private double ref_jdate=2452383.23; // Julian date for April 18.7 2002, Ls=0, beginning of Mars Year 26
 
     private double year_day=668.6; // number of sols in a martian year
-    private double e_ellip=0.09340; // orbital ecentricity
+    private double e_ellip=0.09340; // orbital eccentricity
     private double peri_day=485.35; // perihelion date (in sols)
     private double timeperi=1.90258341759902; // 2*Pi*(1-Ls(perihelion)/360); Ls(perihelion)=250.99
     private double rad2deg=180./Math.PI;
@@ -38,6 +42,8 @@ public class Mars2Earth extends Activity {
     EditText marsDate;
     EditText marsYear;
     TextView earthDate;
+
+    String theTag = "M2E";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -72,14 +78,29 @@ public class Mars2Earth extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        switch (item.getItemId()) {
+            case R.id.earthDateInput:
+                Intent earth2MarsIntent = new Intent(Mars2Earth.this, Earth2Mars.class);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                startActivity(earth2MarsIntent);
+//                newGame();
+//                return true;
+            case R.id.inputMarsDate:
+                Intent mars2EarthIntent = new Intent(Mars2Earth.this, Mars2Earth.class);
+                startActivity(mars2EarthIntent);
+//                showHelp();
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
+//        return super.onOptionsItemSelected(item);
     }
 
     protected void calcEarthDate(){
@@ -108,17 +129,17 @@ public class Mars2Earth extends Activity {
         ls=marsDate;
 // check it is a valid value of Ls:
 //        CheckGivenLs();
-
+        Log.i(theTag, "1 -The Ls input is " + marsDate);
         marsyear=marsYear;
 // check if it is a valid value
 //        CheckGivenMarsYear();
-
+        Log.i(theTag, "2 -The year input is " + marsYear);
 // 1. Find julian date for the (beginning of) chose Mars Year
         jdate=(marsyear-ref_marsyear)*(solsinamarsyear*(sollength/daylength))+ref_jdate;
-
+        Log.i(theTag, "3 -The julian date calculated is" + jdate);
 // 2. Find the number of martian sols corresponding to sought Solar Longitude
         sol=Ls2Sol(ls);
-
+        Log.i(theTag, "4 -The sol calculated is " + sol);
 // small fix; for Ls=0, we get sol=668.59987 instead of sol~0
         if (sol>=668.59) {
             sol=sol+0.01-solsinamarsyear;
@@ -126,12 +147,17 @@ public class Mars2Earth extends Activity {
 
 //3. Add up these sols to get julian date
         jdate=jdate+sol*(sollength/daylength);
+        Log.i(theTag, "5 -The jdate updated is " + jdate);
 
         return jdate;
     }
 
     public int getMarsInputYear() {
         marsInputYear = Integer.parseInt(marsYear.getText().toString());
+//        if (marsInputYear)
+//        {
+//
+//        marsInputYear}
         return marsInputYear;
     }
 
